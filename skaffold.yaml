@@ -20,7 +20,7 @@ requires:
 build:
   local:
     useBuildkit: true
-    concurrency: 3
+    concurrency: 1
   artifacts:
   - image: eu.gcr.io/gardener-project/gardener/apiserver
     docker:
@@ -84,7 +84,7 @@ requires:
 build:
   local:
     useBuildkit: true
-    concurrency: 3
+    concurrency: 1
   artifacts:
   - image: eu.gcr.io/gardener-project/gardener/gardenlet
     docker:
