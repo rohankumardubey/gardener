@@ -24,6 +24,7 @@ import (
 	gardencorev1beta1 "github.com/gardener/gardener/pkg/apis/core/v1beta1"
 	v1beta1constants "github.com/gardener/gardener/pkg/apis/core/v1beta1/constants"
 	"github.com/gardener/gardener/pkg/apis/core/v1beta1/helper"
+	gutil "github.com/gardener/gardener/pkg/utils/gardener"
 
 	"github.com/gardener/gardener/pkg/client/kubernetes"
 	kutil "github.com/gardener/gardener/pkg/utils/kubernetes"
@@ -209,7 +210,7 @@ func (f *ShootFramework) AddShoot(ctx context.Context, shootName, shootNamespace
 	}
 
 	if err := retry.UntilTimeout(ctx, k8sClientInitPollInterval, k8sClientInitTimeout, func(ctx context.Context) (bool, error) {
-		shootClient, err = kubernetes.NewClientFromSecret(ctx, f.SeedClient.Client(), ComputeTechnicalID(f.Project.Name, shoot), gardencorev1beta1.GardenerName, kubernetes.WithClientOptions(client.Options{
+		shootClient, err = kubernetes.NewClientFromSecret(ctx, f.GardenClient.Client(), shoot.Namespace, shoot.Name+"."+gutil.ShootProjectSecretSuffixKubeconfig, kubernetes.WithClientOptions(client.Options{
 			Scheme: kubernetes.ShootScheme,
 		}))
 		if err != nil {
