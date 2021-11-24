@@ -55,13 +55,6 @@ func (m *mutator) Mutate(ctx context.Context, new, _ client.Object) error {
 			extensionswebhook.LogMutation(logger, x.Kind, x.Namespace, x.Name)
 			return m.mutateKubeProxyConfigMap(ctx, x)
 		}
-
-	case *corev1.Service:
-		switch x.Name {
-		case "vpn-shoot":
-			extensionswebhook.LogMutation(logger, x.Kind, x.Namespace, x.Name)
-			return m.mutateVPNShootService(ctx, x)
-		}
 	}
 
 	return nil

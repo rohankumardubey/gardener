@@ -39,7 +39,7 @@ func AddToManagerWithOptions(mgr manager.Manager, opts AddOptions) (*extensionsw
 	logger.Info("Adding webhook to manager")
 
 	return shoot.New(mgr, shoot.Args{
-		Types:   []client.Object{&corev1.ConfigMap{}, &corev1.Service{}},
+		Types:   []client.Object{&corev1.ConfigMap{}},
 		Mutator: NewMutator(),
 	})
 }
