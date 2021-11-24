@@ -31,4 +31,4 @@ spec:
     - name: local
       versions:
       - version: 1.0.0
-        image: ghcr.io/gardener/machine-controller-manager-provider-local/node:sha-c0296e3
+        image: ghcr.io/gardener/machine-controller-manager-provider-local/node:sha-f733395
