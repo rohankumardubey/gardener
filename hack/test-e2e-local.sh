@@ -4,7 +4,7 @@ create_failed=yes
 trap shoot_deletion EXIT
 
 function shoot_deletion {
-  go test -mod=vendor -timeout=10m ./test/system/shoot_deletion \
+  go test -mod=vendor -timeout=60m ./test/system/shoot_deletion \
     --v -ginkgo.v -ginkgo.progress \
     -kubecfg=$KUBECONFIG \
     -project-namespace=garden-local \
@@ -15,7 +15,7 @@ function shoot_deletion {
   fi
 }
 
-go test -mod=vendor -timeout=10m ./test/system/shoot_creation \
+go test -mod=vendor -timeout=60m ./test/system/shoot_creation \
   --v -ginkgo.v -ginkgo.progress \
   -kubecfg=$KUBECONFIG \
   -project-namespace=garden-local \
