@@ -253,7 +253,7 @@ kind-down:
 # workaround for https://github.com/GoogleContainerTools/skaffold/issues/6416
 export SKAFFOLD_LABEL := skaffold.dev/run-id=gardener-local
 gardener-up: $(SKAFFOLD) $(HELM)
-	VERSION=$(EFFECTIVE_VERSION) $(SKAFFOLD) run --tail -m provider-local
+	VERSION=$(EFFECTIVE_VERSION) $(SKAFFOLD) run -m provider-local
 
 gardener-down: $(SKAFFOLD) $(HELM)
 	$(SKAFFOLD) delete -m provider-local
