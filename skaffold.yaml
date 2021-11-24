@@ -106,6 +106,21 @@ build:
         VERSION: "{{.VERSION}}"
 deploy:
   helm:
+    hooks:
+      after:
+      - host:
+          command:
+          - bash
+          - -c
+          - |
+            for i in $(seq 1 30) ; do
+              if kubectl get vpa &>/dev/null ; then
+                exit 0
+              fi
+              echo "Waiting until VerticalPodAutoscaler is discoverable"
+              sleep 2
+            done
+            exit 1
     releases:
     - name: gardener-gardenlet
       chartPath: charts/gardener/gardenlet
