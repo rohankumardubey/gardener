@@ -5,7 +5,7 @@ FROM alpine:3.13.6 AS base
 # for `skaffold debug` (https://skaffold.dev/docs/workflows/debug/).
 ENV GOTRACEBACK=single
 
-RUN apk add --update openvpn tzdata
+RUN apk add --update tzdata
 
 ############# builder-base #############
 FROM golang:1.17.2 AS builder-base
@@ -147,6 +147,8 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
     -o /gardenlet ./cmd/gardenlet
 
 FROM base AS gardenlet
+
+RUN apk add --update openvpn
 
 COPY charts /charts
 COPY --from=builder-gardenlet /gardenlet /gardenlet
